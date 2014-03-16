@@ -16,10 +16,9 @@
 			AND user_name like CONCAT(CONCAT('%', #{userName,
 			jdbcType=VARCHAR}),'%')
 		</if>
-
 	</select>
-	<select id="getBlogUser" parameterType="String" resultMap="BlogUserMapper">
-		select * from blog_user where user_code =#{userCode}
+	<select id="getBlogUser" parameterType="map" resultMap="BlogUserMapper">
+		select * from blog_user where user_code =#{userCode} and user_password=#{userPassword}
 	</select>
 	<resultMap type="com.blog.entity.BlogUserEntity" id="BlogUserMapper"
 		autoMapping="true">

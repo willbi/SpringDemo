@@ -1,6 +1,7 @@
 package com.blog.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.blog.entity.BlogUserEntity;
 
@@ -8,7 +9,7 @@ public interface BlogUserService {
 	
 	public List<BlogUserEntity> getBlogUserList(BlogUserEntity entity);
 
-	public BlogUserEntity getBlogUser(String userCode);
+	public BlogUserEntity getBlogUser(Map<String,Object> params);
 	
 	public void addBlogUser(BlogUserEntity entity);
 	

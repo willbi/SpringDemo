@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.blog.common.AuthController;
 import com.blog.common.BaseController;
 import com.blog.common.JsonHelper;
 import com.blog.common.JsonMsg;
@@ -25,18 +26,19 @@ import com.blog.service.BlogUserService;
 
 @Controller
 @RequestMapping("/user")
-public class BlogUserController extends BaseController {
+public class BlogUserController extends AuthController {
 
 	@Resource(name = "BlogUserService")
 	private BlogUserService blogUserService;
 
 	@RequestMapping("user")
-	public ModelAndView getBlogUserList() {
+	public ModelAndView getBlogUserList(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView("user/userlist");
 		BlogUserEntity entity = new BlogUserEntity();
 		List<BlogUserEntity> list = this.blogUserService
 				.getBlogUserList(entity);
 		mav.addObject("userlist", list);
+		request.getSession().setAttribute("user_name","will");
 		return mav;
 	}
 

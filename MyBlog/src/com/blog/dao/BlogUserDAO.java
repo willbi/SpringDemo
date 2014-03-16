@@ -1,6 +1,7 @@
 package com.blog.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +12,7 @@ public interface BlogUserDAO {
 
 	public List<BlogUserEntity> getBlogUserList(BlogUserEntity entity);
 
-	public BlogUserEntity getBlogUser(String userCode);
+	public BlogUserEntity getBlogUser(Map<String,Object> params);
 	
 	public void addBlogUser(BlogUserEntity entity);
 	

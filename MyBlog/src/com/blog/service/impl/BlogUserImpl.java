@@ -1,6 +1,7 @@
 package com.blog.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -20,8 +21,8 @@ public class BlogUserImpl implements BlogUserService {
 		return blogUserDAO.getBlogUserList(entity);
 	}
 
-	public BlogUserEntity getBlogUser(String userCode){
-		return blogUserDAO.getBlogUser(userCode);
+	public BlogUserEntity getBlogUser(Map<String,Object> params){
+		return blogUserDAO.getBlogUser(params);
 	}
 	
 	public void addBlogUser(BlogUserEntity entity){
