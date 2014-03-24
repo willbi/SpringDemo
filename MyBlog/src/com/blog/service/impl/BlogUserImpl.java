@@ -25,6 +25,10 @@ public class BlogUserImpl implements BlogUserService {
 		return blogUserDAO.getBlogUser(params);
 	}
 	
+	public BlogUserEntity getBlogUserByID(int userID){
+		return blogUserDAO.getBlogUserByID(userID);
+	}
+	
 	public void addBlogUser(BlogUserEntity entity){
 		this.blogUserDAO.addBlogUser(entity);
 	}

@@ -9,35 +9,22 @@
 <title>µÇÂ¼</title>
 <script type="text/javascript"
 	src="<c:url value='/Resource/JavaScript/Common/jquery-1.8.2.js' />"></script>
-	<script type="text/javascript">
-	function doLogin(){
-		var data ={};
-		data.userCode=$("input[name=userCode]").val();
-		data.userPassword=$("input[name=userPassword]").val();
+<script type="text/javascript"
+	src="<c:url value='/Resource/JavaScript/Common/Common.js' />"></script>
+<script type="text/javascript">
+	function doLogin() {
+		var data = {};
+		data.userCode = $("input[name=userCode]").val();
+		data.userPassword = $("input[name=userPassword]").val();
 		postByJson(data, "doLogin", function(result) {
-			if(result.code>0){
-				window.location.href="../user/user";
-			}else{
+			if (result.code > 0) {
+				window.location.href = "../user/index";
+			} else {
 				alert(result.msg);
 			}
 		});
 	}
-	function postByJson(data, url, callback) {
-		$.ajax({
-			type : 'POST',
-			url : url,
-			contentType : 'application/json',
-			mimeType : 'application/json',
-			data : JSON.stringify(data),
-			success : function(response) {
-				callback(response);
-			},
-			error : function(error) {
-				alert("³ö´íÁË");
-			}
-		});
-	}
-	</script>
+</script>
 </head>
 <body>
 	<table>
@@ -50,7 +37,8 @@
 			<td><input type="password" name="userPassword" /></td>
 		</tr>
 		<tr>
-			<td colspan="2"><input type="button" value="µÇÂ¼" onclick="doLogin()" /></td>
+			<td colspan="2"><input type="button" value="µÇÂ¼"
+				onclick="doLogin()" /></td>
 		</tr>
 	</table>
 </body>

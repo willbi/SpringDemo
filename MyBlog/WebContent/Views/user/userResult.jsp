@@ -15,7 +15,7 @@
 			<td>${d.userCode}</td>
 			<td>${d.userName}</td>
 			<td>${d.userPassword}</td>
-			<td><a href="###" onclick="update(this)">ÐÞ¸Ä</a></td>
+			<td><a href="###" onclick="update(${d.userID})">ÐÞ¸Ä</a></td>
 			<td><a href="###" onclick="del(${d.userID})">É¾³ý</a></td>
 		</tr>
 	</c:forEach>

@@ -11,6 +11,8 @@ public interface BlogUserService {
 
 	public BlogUserEntity getBlogUser(Map<String,Object> params);
 	
+	public BlogUserEntity getBlogUserByID(int userID);
+	
 	public void addBlogUser(BlogUserEntity entity);
 	
 	public void updateBlogUser(BlogUserEntity entity);

@@ -20,11 +20,15 @@
 	<select id="getBlogUser" parameterType="map" resultMap="BlogUserMapper">
 		select * from blog_user where user_code =#{userCode} and user_password=#{userPassword}
 	</select>
+	<select id="getBlogUserByID" parameterType="int" resultMap="BlogUserMapper">
+		select * from blog_user where user_id =#{userID}
+	</select>
 	<resultMap type="com.blog.entity.BlogUserEntity" id="BlogUserMapper"
 		autoMapping="true">
 		<result property="userID" column="USER_ID" />
 		<result property="userCode" column="USER_CODE" />
 		<result property="userName" column="USER_NAME" />
+		<result property="userPassword" column="USER_PASSWORD" />
 	</resultMap>
 
 	<insert id="addBlogUser" useGeneratedKeys="true" keyProperty="userID"

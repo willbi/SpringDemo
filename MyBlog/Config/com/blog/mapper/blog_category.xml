@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.dao.BlogCategoryDAO">
+	<select id="getBlogCategoryList" parameterType="com.blog.entity.BlogCategoryEntity"
+		resultMap="BlogCategoryMapper">
+		select * from blog_category where 1=1
+		<if test="cateID != null and cateID != '' ">
+			AND cate_id = #{cateID, jdbcType=INTEGER}
+		</if>
+		<if test="cateCode != null and cateCode!= '' ">
+			AND cate_code = #{cateCode, jdbcType=VARCHAR}
+		</if>
+		<if test="cateName!=null and cateName!=''">
+			AND cate_name like CONCAT(CONCAT('%', #{cateName,
+			jdbcType=VARCHAR}),'%')
+		</if>
+	</select>
+	<select id="getBlogCategory" parameterType="int" resultMap="BlogCategoryMapper">
+		select * from blog_category where cate_id =#{cateID}
+	</select>
+	<resultMap type="com.blog.entity.BlogCategoryEntity" id="BlogCategoryMapper"
+		autoMapping="true">
+		<result property="cateID" column="CATE_ID" />
+		<result property="cateCode" column="CATE_CODE" />
+		<result property="cateName" column="CATE_NAME" />
+		<result property="cateDesc" column="CATE_DESC" />
+		<result property="cateSort" column="CATE_SORT" />
+	</resultMap>
+
+	<insert id="addBlogCategory" useGeneratedKeys="true" keyProperty="cateID"
+		parameterType="com.blog.entity.BlogCategoryEntity">
+		insert into blog_category(cate_code, cate_name,
+		cate_desc,cate_sort)
+		value(#{cateCode}, #{cateName}, #{cateDesc}, #{cateSort})
+	</insert>
+
+	<insert id="updateBlogCategory" parameterType="com.blog.entity.BlogCategoryEntity">
+		update blog_category set
+		cate_code=#{cateCode}, cate_name=#{cateName},
+		cate_desc=#{cateDesc}, cate_sort =#{cateSort}
+		where cate_id= #{cateID}
+	</insert>
+	<delete id="delBlogCategory" parameterType="int">
+		delete from blog_category where
+		cate_id=#{cateID}
+	</delete>
+</mapper>

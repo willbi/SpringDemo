@@ -45,30 +45,23 @@ public class SecurityInterceptor implements HandlerInterceptor {
 					.getAttribute("UserSession");
 			if (entity != null) {
 				// 已登录,则判断是否有菜单权限
-			}else{
-				//未登录
-				if(isAjaxRequest(request)){
-					//ajax请求
-					
-				}else{
-					//非ajax请求
-					response.sendRedirect(request.getContextPath() +"/login/index");
+			} else {
+				String timeoutPage = request.getContextPath() + "/login/index";
+				// 未登录
+				if (Utils.isAjaxRequest(request)) {
+					// ajax请求
+					response.setHeader("sessionstatus", "timeout");
+					response.setHeader("timeoutpage", timeoutPage);
+					response.flushBuffer();
+				} else {
+					// 非ajax请求
+					response.sendRedirect(timeoutPage);
 				}
 				return false;
 			}
-			
 
 		}
 		return true;
-	}
-
-	private boolean isAjaxRequest(HttpServletRequest req) {
-		String requestType = req.getHeader("X-Requested-With");
-		if (requestType != null && requestType.equals("XMLHttpRequest")) {
-			return true;
-		} else {
-			return false;
-		}
 	}
 
 }
