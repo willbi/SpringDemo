@@ -22,14 +22,25 @@
 				value="${blog.blogTitle }" /> <input type="hidden" bind="blogID"
 				value="${blog.blogID }" /></td>
 		</tr>
-<tr>
+		<tr>
 			<td>英文标题</td>
 			<td><input type="text" bind="blogTitleEn"
-				value="${blog.blogTitleEn }" /> </td>
+				value="${blog.blogTitleEn }" /></td>
 		</tr>
 		<tr>
 			<td>分类</td>
-			<td><input type="text" bind="cateID" value="${blog.cateName }" /></td>
+			<td><select bind="cateID">
+					<c:forEach items="${cate}" var="c">
+						<c:choose>
+							<c:when test="${c.cateID ==blog.cateID }">
+								<option selected value="${c.cateID }">${c.cateName }</option>
+							</c:when>
+							<c:otherwise>
+								<option value="${c.cateID }">${c.cateName }</option>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+			</select></td>
 		</tr>
 		<tr>
 			<td>描述</td>

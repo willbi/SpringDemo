@@ -3,7 +3,7 @@ function save() {
 	data.blogID = $("input[bind=blogID]").val();
 	data.blogTitle = $("input[bind=blogTitle]").val();
 	data.blogTitleEn = $("input[bind=blogTitleEn]").val();
-	data.cateID = $("input[bind=cateID]").val();
+	data.cateID = $("select[bind=cateID]").val();
 	data.blogDesc = $("textarea[bind=blogDesc]").val();
 	data.blogContent = $("textarea[bind=blogContent]").val();
 	postByJson(data, "save", function(result) {

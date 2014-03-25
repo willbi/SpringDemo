@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.blog.common.AuthController;
 import com.blog.common.JsonMsg;
 import com.blog.common.PageEntity;
+import com.blog.entity.BlogCategoryEntity;
 import com.blog.entity.BlogContentEntity;
 import com.blog.entity.BlogUserEntity;
 import com.blog.service.BlogCategoryService;
@@ -26,6 +27,9 @@ public class BlogContentController extends AuthController {
 
 	@Resource(name = "BlogContentService")
 	private BlogContentService blogContentService;
+	
+	@Resource(name = "BlogCategoryService")
+	private BlogCategoryService blogCategoryService;
 
 	@RequestMapping("index")
 	public ModelAndView index(HttpServletRequest req) {
@@ -75,6 +79,8 @@ public class BlogContentController extends AuthController {
 			e.printStackTrace();
 		}
 		mav.addObject("blog", entity);
+		List<BlogCategoryEntity> list =blogCategoryService.getBlogCategoryList(new BlogCategoryEntity());
+		mav.addObject("cate", list);
 		return mav;
 	}
 
@@ -88,8 +94,7 @@ public class BlogContentController extends AuthController {
 					.getAttribute("UserSession");
 			entity.setCreateDateTime(new Date());
 			entity.setUserID(user.getUserID());
-			if(entity.getBlogTitleEn()==null||entity.getBlogTitleEn().isEmpty())
-				entity.setBlogTitleEn("dddddd");
+			
 			if (entity.getBlogID() > 0)
 				this.blogContentService.updateBlogContent(entity);
 			else
