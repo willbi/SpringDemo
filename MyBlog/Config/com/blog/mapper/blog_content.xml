@@ -1,1 +1,73 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mapper  
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.blog.dao.BlogContentDAO">
+	<select id="getBlogContentList" resultMap="BlogContentMapper">
+		select b.*,c.cate_name,u.user_name from blog_content b
+		left join blog_category c on c.cate_id = b.cate_id
+		left join blog_user u on
+		u.user_id = b.user_id
+		where 1=1
+		<if test="param1.blogID >0 ">
+			AND b.blog_id = #{param1.blogID, jdbcType=INTEGER}
+		</if>
+		<if test="param1.cateID >0 ">
+			AND b.cate_id = #{param1.cateID, jdbcType=INTEGER}
+		</if>
+		<if test="param1.userID >0 ">
+			AND b.user_id = #{param1.userID, jdbcType=INTEGER}
+		</if>
+		order by b.create_datetime desc
+		<if test="param2.pageStart>-1 and param2.pageSize>0">
+			LIMIT #{param2.pageStart}, #{param2.pageSize}
+		</if>
+
+	</select>
+	<select id="getBlogContent" parameterType="int" resultMap="BlogContentMapper">
+		select b.*,c.cate_name,u.user_name from blog_content b
+		left join blog_category c on c.cate_id = b.cate_id
+		left join blog_user u on
+		u.user_id = b.user_id where blog_id =#{blogID}
+	</select>
+	<resultMap type="com.blog.entity.BlogContentEntity" id="BlogContentMapper"
+		autoMapping="true">
+		<result property="blogID" column="BLOG_ID" />
+		<result property="cateID" column="CATE_ID" />
+		<result property="userID" column="USER_ID" />
+		<result property="blogTitle" column="BLOG_TITLE" />
+		<result property="blogTitleEn" column="BLOG_TITLE_EN" />
+		<result property="blogContent" column="BLOG_CONTENT" />
+		<result property="blogDesc" column="BLOG_DESC" />
+		<result property="createDateTime" column="CREATE_DATETIME" />
+		<result property="cateName" column="CATE_NAME" />
+		<result property="userName" column="USER_NAME" />
+	</resultMap>
+
+	<insert id="addBlogContent" useGeneratedKeys="true" keyProperty="blogID"
+		parameterType="com.blog.entity.BlogContentEntity">
+		insert into blog_content(cate_id, user_id,
+		blog_title,blog_title_en,blog_content,blog_desc,create_datetime)
+		value(#{cateID}, #{userID}, #{blogTitle},
+		#{blogTitleEn},#{blogContent},#{blogDesc},#{createDateTime})
+	</insert>
+
+	<insert id="updateBlogContent" parameterType="com.blog.entity.BlogContentEntity">
+		update
+		blog_content
+		set
+		cate_id=#{cateID}, user_id=#{userID},
+		blog_title=#{blogTitle},
+		blog_title_en =#{blogTitleEn},
+		blog_content=#{blogContent}, blog_desc
+		=#{blogDesc},
+		create_datetime=#{createDateTime}
+		where blog_id=
+		#{blogID}
+	</insert>
+	<delete id="delBlogContent" parameterType="int">
+		delete from
+		blog_content where
+		blog_id=#{blogID}
+	</delete>
+</mapper>

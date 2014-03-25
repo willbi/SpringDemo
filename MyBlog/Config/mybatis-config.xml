@@ -8,6 +8,7 @@
     <mappers>  
     <!--映射文件-->  
        <mapper resource="/com/blog/mapper/blog_user.xml"/> 
-       <mapper resource="/com/blog/mapper/blog_category.xml"/>  
+       <mapper resource="/com/blog/mapper/blog_category.xml"/> 
+       <mapper resource="/com/blog/mapper/blog_content.xml"/>   
     </mappers>  
 </configuration>  
