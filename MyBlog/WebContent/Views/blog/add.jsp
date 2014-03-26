@@ -8,8 +8,10 @@
 <jsp:include page="../jsReference.jsp"></jsp:include>
 <script type="text/javascript"
 	src="<c:url value='/Resource/JavaScript/Module/Blog.js' />"></script>
+<script type="text/javascript"
+	src="<c:url value='/Resource/Plugin/ckeditor/ckeditor.js' />"></script>
 
-<title>文章列表</title>
+<title>文章编辑</title>
 </head>
 <body>
 	<jsp:include page="../header.jsp"></jsp:include>
@@ -44,16 +46,20 @@
 		</tr>
 		<tr>
 			<td>描述</td>
-			<td><textarea style="height: 30px" bind="blogDesc">${blog.blogDesc }</textarea></td>
+			<td><textarea style="height: 50px;width:320px;" cols="200" bind="blogDesc">${blog.blogDesc }</textarea></td>
 		</tr>
 		<tr>
 			<td>内容</td>
-			<td><textarea style="height: 60px" bind="blogContent">${blog.blogContent }</textarea></td>
+			<td><textarea style="height: 60px" id="txtBlogContent"
+					bind="blogContent">${blog.blogContent }</textarea></td>
 		</tr>
 		<tr>
 			<td colspan="2"><input type="button" value="提交" onclick="save()" />
 			</td>
 		</tr>
 	</table>
+	<script type="text/javascript">
+		var editor = CKEDITOR.replace('txtBlogContent');
+	</script>
 </body>
 </html>

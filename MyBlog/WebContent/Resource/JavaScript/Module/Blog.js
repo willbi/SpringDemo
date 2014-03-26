@@ -5,7 +5,7 @@ function save() {
 	data.blogTitleEn = $("input[bind=blogTitleEn]").val();
 	data.cateID = $("select[bind=cateID]").val();
 	data.blogDesc = $("textarea[bind=blogDesc]").val();
-	data.blogContent = $("textarea[bind=blogContent]").val();
+	data.blogContent = editor.getData();
 	postByJson(data, "save", function(result) {
 		if (result.code > 0) {
 			alert("±£´æ³É¹¦");
